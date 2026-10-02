@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Indian Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #c18a32;
+    --light-gold: #e6c77d;
+    --red: #811a27;
+    --dark-red: #4b0915;
+    --cream: #fff4db;
+    --text: #4a211c;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #fff1d4, #ead0a2);
+    font-family: 'Cormorant Garamond', serif;
+    padding: 30px 12px;
+    overflow-x: hidden;
+}
+
+/* CUSTOMIZATION PANEL */
+.name-editor {
+    width: min(100%, 600px);
+    margin: 0 auto 35px;
+    padding: 25px;
+    background: #fffaf0;
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px #53230b20;
+    text-align: center;
+    position: relative;
+    z-index: 12;
+}
+
+.name-editor h2 {
+    color: var(--red);
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.editor-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #806d5d;
+    margin-bottom: 20px;
+}
+
+.name-editor label {
+    display: block;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    margin: 12px 0 6px;
+}
+
+.name-editor input,
+.name-editor textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c18a32;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    outline: none;
+    background: #fffdf8;
+    color: var(--text);
+}
+
+.name-editor input:focus,
+.name-editor textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 6px #c18a3260;
+}
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 12px 22px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.update-btn {
+    background: var(--red);
+    color: white;
+}
+
+.reset-btn {
+    background: transparent;
+    color: var(--red);
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px #3e170b25;
+}
+
+.editor-status {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #40743d;
+    margin-top: 12px;
+}
+
+/* CARD */
+.invitation {
+    position: relative;
+    width: min(100%, 650px);
+    margin: 0 auto;
+    background: radial-gradient(ellipse at center, #fffaf0 0%, #fff2d6 75%, #f4dfb8 100%);
+    border: 8px double var(--gold);
+    outline: 2px solid #8b5c20;
+    outline-offset: 5px;
+    box-shadow: 0 15px 55px #53230b38;
+    text-align: center;
+    padding: 48px 35px 35px;
+    overflow: hidden;
+    animation: cardEnter 1.4s ease both;
+}
+
+.invitation::before,
+.invitation::after {
+    content: "❀";
+    position: absolute;
+    font-size: 150px;
+    color: #d7ae6040;
+    pointer-events: none;
+}
+
+.invitation::before {
+    top: 37%;
+    left: -45px;
+}
+
+.invitation::after {
+    bottom: 24%;
+    right: -45px;
+}
+
+.inner-frame {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid #c18a3280;
+    pointer-events: none;
+}
+
+.corner {
+    position: absolute;
+    font-size: 45px;
+    color: var(--gold);
+    z-index: 2;
+    line-height: 1;
+}
+
+.top-left { top: 12px; left: 15px; }
+.top-right { top: 12px; right: 15px; }
+.bottom-left { bottom: 12px; left: 15px; }
+.bottom-right { bottom: 12px; right: 15px; }
+
+.content {
+    position: relative;
+    z-index: 3;
+}
+
+.ganesha {
+    font-size: 65px;
+    color: #b97d23;
+    margin-bottom: 4px;
+    animation: glow 3s infinite alternate;
+}
+
+.mantra {
+    color: #a16a1e;
+    font-size: 19px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.invite-text {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text);
+    margin: 0 auto 10px;
+    max-width: 480px;
+}
+
+.names {
+    color: var(--red);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(65px, 12vw, 100px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+    animation: nameGlow 3s infinite alternate;
+}
+
+.ampersand {
+    color: var(--gold);
+    font-family: 'Great Vibes', cursive;
+    font-size: 58px;
+    line-height: 1;
+}
+
+.tagline {
+    font-size: 21px;
+    letter-spacing: 1px;
+    color: #64392c;
+    margin: 13px 0 28px;
+}
+
+.ornament {
+    color: var(--gold);
+    font-size: 25px;
+    letter-spacing: 7px;
+    margin: 15px 0;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.detail {
+    padding: 12px 7px;
+    border-right: 1px solid #c18a3280;
+}
+
+.detail:last-child {
+    border-right: none;
+}
+
+.detail-icon {
+    font-size: 30px;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.detail h3 {
+    font-size: 23px;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.detail p {
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+
+.family {
+    font-size: 21px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-top: 15px;
+}
+
+.family strong {
+    display: block;
+    font-style: italic;
+    color: var(--red);
+    font-size: 30px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Decorative couple */
+.couple {
+    width: 210px;
+    height: 145px;
+    margin: 15px auto -5px;
+    position: relative;
+}
+
+.couple svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 5px 5px #6b2c2230);
+}
+
+/* Floral decorations */
+.flowers {
+    position: absolute;
+    font-size: 27px;
+    animation: sway 4s ease-in-out infinite;
+}
+
+.flower1 { top: 10px; left: 20%; }
+.flower2 { top: 10px; right: 20%; animation-delay: 1s; }
+.flower3 { top: 42%; left: 7%; animation-delay: 1.5s; }
+.flower4 { top: 42%; right: 7%; animation-delay: 2s; }
+
+/* Falling petals */
+.petal {
+    position: fixed;
+    top: -30px;
+    color: #b92d43;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+/* Bottom controls */
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px auto;
+    flex-wrap: wrap;
+}
+
+.card-btn {
+    border: 1px solid var(--gold);
+    padding: 13px 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.print-btn {
+    color: white;
+    background: var(--red);
+}
+
+.share-btn {
+    color: var(--red);
+    background: #fff6e6;
+}
+
+.card-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px #3e170b30;
+}
+
+footer {
+    text-align: center;
+    color: #633d2d;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+/* Animations */
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(40px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 3px #d5a44c; }
+    to { text-shadow: 0 0 20px #d5a44c; }
+}
+
+@keyframes nameGlow {
+    from { text-shadow: 0 0 0 transparent; }
+    to { text-shadow: 0 3px 15px #8b1d2720; }
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-5vh) rotate(0deg); opacity: .9; }
+    100% { transform: translateY(110vh) rotate(600deg); opacity: .1; }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    body { padding: 18px 12px; }
+
+    .name-editor { padding: 20px 15px; }
+
+    .name-editor h2 { font-size: 27px; }
+
+    .editor-grid { grid-template-columns: 1fr; gap: 0; }
+
+    .invitation {
+        padding: 45px 16px 25px;
+        border-width: 5px;
+    }
+
+    .invite-text { font-size: 18px; }
+    .mantra { font-size: 15px; }
+    .names { font-size: 65px; }
+    .ampersand { font-size: 43px; }
+    .tagline { font-size: 17px; }
+    .details { gap: 2px; }
+    .detail { padding: 9px 3px; }
+    .detail h3 { font-size: 18px; }
+    .detail p { font-size: 14px; }
+    .detail-icon { font-size: 24px; }
+    .family { font-size: 18px; }
+    .family strong { font-size: 25px; }
+    .couple { width: 180px; height: 125px; }
+}
+
+/* Print */
+@media print {
+    @page {
+        size: A5 portrait;
+        margin: 0;
+    }
+
+    body {
+        padding: 0;
+        background: white;
+        display: block;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .name-editor,
+    .card-actions,
+    footer,
+    .petal {
+        display: none !important;
+    }
+
+    .invitation {
+        width: 100%;
+        max-width: none;
+        min-height: 210mm;
+        border: 5px double var(--gold);
+        outline: none;
+        box-shadow: none;
+        animation: none;
+        page-break-inside: avoid;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAME CUSTOMIZATION PANEL -->
+<section class="name-editor">
+    <h2>💍 Customize Your Wedding Card</h2>
+    <p class="editor-subtitle">
+        Enter the couple's details and update your invitation.
+    </p>
+
+    <div class="editor-grid">
+        <div>
+            <label for="groomInput">Groom's Name</label>
+            <input type="text" id="groomInput"
+                   placeholder="Enter groom's name"
+                   value="Aarav" maxlength="50">
+        </div>
+
+        <div>
+            <label for="brideInput">Bride's Name</label>
+            <input type="text" id="brideInput"
+                   placeholder="Enter bride's name"
+                   value="Ananya" maxlength="50">
+        </div>
+    </div>
+
+    <label for="dateInput">Wedding Date</label>
+    <input type="text" id="dateInput"
+           value="Sunday, 22 November 2026">
+
+    <label for="timeInput">Wedding Time</label>
+    <input type="text" id="timeInput"
+           value="6:30 PM Onwards">
+
+    <label for="venueInput">Wedding Venue</label>
+    <input type="text" id="venueInput"
+           value="Royal Grand Convention Hall, Vijayawada">
+
+    <label for="familyInput">Family Names / Invitation From</label>
+    <input type="text" id="familyInput"
+           value="The Families of Aarav & Ananya">
+
+    <div class="editor-actions">
+        <button type="button" class="action-btn update-btn"
+                onclick="updateCard()">
+            Update Invitation
+        </button>
+
+        <button type="button" class="action-btn reset-btn"
+                onclick="resetCard()">
+            Reset
+        </button>
+    </div>
+
+    <p id="editorStatus" class="editor-status" aria-live="polite"></p>
+</section>
+
+<!-- WEDDING INVITATION CARD -->
+<main>
+<div class="invitation" id="invitation">
+
+    <div class="inner-frame"></div>
+
+    <span class="corner top-left">❦</span>
+    <span class="corner top-right">❦</span>
+    <span class="corner bottom-left">❦</span>
+    <span class="corner bottom-right">❦</span>
+
+    <span class="flowers flower1">🌺</span>
+    <span class="flowers flower2">🌼</span>
+    <span class="flowers flower3">🌸</span>
+    <span class="flowers flower4">🌺</span>
+
+    <div class="content">
+
+        <div class="ganesha">ॐ</div>
+        <p class="mantra">॥ श्री गणेशाय नमः ॥</p>
+
+        <p class="invite-text">
+            With the blessings of our parents<br>
+            and the grace of the Almighty,<br>
+            we cordially invite you to the wedding of
+        </p>
+
+        <h1 class="names" id="groomName">Aarav</h1>
+        <div class="ampersand">&</div>
+        <h1 class="names" id="brideName">Ananya</h1>
+
+        <p class="tagline">Two hearts. One journey. Forever.</p>
+
+        <div class="ornament">✦ ❧ ✦</div>
+
+        <div class="details">
+
+            <div class="detail">
+                <div class="detail-icon">♧</div>
+                <h3>Wedding Day</h3>
+                <p id="cardDate">
+                    Sunday<br>
+                    22 November 2026
+                </p>
+                <p id="cardTime">6:30 PM Onwards</p>
+            </div>
+
+            <div class="detail">
+                <div class="detail-icon">♙</div>
+                <h3>Venue</h3>
+                <p id="cardVenue">
+                    Royal Grand<br>
+                    Convention Hall,<br>
+                    Vijayawada
+                </p>
+            </div>
+
+            <div class="detail">
+                <div class="detail-icon">❀</div>
+                <h3>Blessings</h3>
+                <p>
+                    Your presence<br>
+                    and blessings<br>
+                    mean the world
+                </p>
+            </div>
+
+        </div>
+
+        <div class="ornament">✦ ❧ ✦</div>
+
+        <div class="family">
+            With love,<br>
+            <strong id="familyNames">
+                The Families of Aarav & Ananya
+            </strong>
+        </div>
+
+        <!-- Decorative bride and groom illustration -->
+        <div class="couple">
+            <svg viewBox="0 0 220 145" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="110" cy="137" rx="98" ry="6"
+                         fill="#b98b3e" opacity=".3"/>
+
+                <!-- Groom -->
+                <path d="M43 134 Q38 96 51 69 L75 56 L94 76 L99 134Z"
+                      fill="#e8d1a3" stroke="#b48a42" stroke-width="2"/>
+                <path d="M52 78 L77 66 L93 83 L99 134 L82 134Z"
+                      fill="#a51d2c"/>
+                <path d="M49 83 L68 72 L76 134 L56 134Z"
+                      fill="#f5e5c1"/>
+                <circle cx="69" cy="47" r="19" fill="#b8794e"/>
+                <path d="M49 44 Q50 18 69 20 Q89 22 89 44
+                         L84 42 L82 31 L55 33 L53 44Z"
+                      fill="#40251e"/>
+                <path d="M49 34 Q52 14 71 16 Q91 17 91 34
+                         L85 39 L53 39Z"
+                      fill="#dfb45c" stroke="#aa772c" stroke-width="2"/>
+                <path d="M53 30 Q68 21 86 30 M52 35 Q70 26 88 35"
+                      fill="none" stroke="#fff0bd" stroke-width="2"/>
+                <circle cx="70" cy="20" r="5" fill="#b88b36"/>
+
+                <!-- Bride -->
+                <path d="M115 134 Q111 94 128 71 L149 60
+                         L169 77 L181 134Z"
+                      fill="#a51b2c" stroke="#a67734" stroke-width="2"/>
+                <path d="M116 134 Q130 106 137 75 L149 60
+                         L163 76 Q154 112 166 134Z"
+                      fill="#e0b65e"/>
+                <path d="M122 134 L137 83 L151 93 L160 134Z"
+                      fill="#9b172b"/>
+                <path d="M128 84 L150 72 L170 84"
+                      fill="none" stroke="#eac979" stroke-width="3"/>
+                <circle cx="146" cy="48" r="17" fill="#b97b54"/>
+                <path d="M129 47 Q127 25 146 24 Q166 24 164 47
+                         Q158 37 146 37 Q135 37 129 47Z"
+                      fill="#34201c"/>
+                <path d="M128 40 Q121 47 127 71 L139 88
+                         L157 80 Q168 59 164 40 L155 31 L135 31Z"
+                      fill="#a51b2c" opacity=".92"/>
+                <path d="M128 42 Q125 64 139 86 M163 42 Q166 63 157 80"
+                      fill="none" stroke="#e9c26d" stroke-width="3"/>
+                <g fill="#fff0d1">
+                    <circle cx="136" cy="31" r="3"/>
+                    <circle cx="142" cy="28" r="3"/>
+                    <circle cx="149" cy="27" r="3"/>
+                    <circle cx="156" cy="31" r="3"/>
+                </g>
+
+                <g fill="none" stroke="#f0d48a" stroke-width="1.4">
+                    <path d="M59 93 l9 6 9-6 M59 108 l9 6 9-6"/>
+                    <path d="M135 101 l10 6 10-6 M135 115 l10 6 10-6"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="ornament">♥ ❧ ♥</div>
+
+        <p class="invite-text" style="font-size:17px">
+            We await your gracious presence<br>
+            to bless our new beginning.
+        </p>
+
+    </div>
+</div>
+
+<!-- PRINT AND SHARE -->
+<div class="card-actions">
+    <button class="card-btn print-btn" onclick="window.print()">
+        PRINT / SAVE AS PDF
+    </button>
+
+    <button class="card-btn share-btn" onclick="shareCard()">
+        SHARE INVITATION
+    </button>
+</div>
+</main>
+
+<footer>
+    Made with love ♡ | Wedding Invitation
+</footer>
+
+<script>
+// Default wedding details
+const defaults = {
+    groom: "Aarav",
+    bride: "Ananya",
+    date: "Sunday, 22 November 2026",
+    time: "6:30 PM Onwards",
+    venue: "Royal Grand Convention Hall, Vijayawada",
+    family: "The Families of Aarav & Ananya"
+};
+
+// Update invitation card
+function updateCard(save = true) {
+    const groom = document.getElementById("groomInput").value.trim();
+    const bride = document.getElementById("brideInput").value.trim();
+    const date = document.getElementById("dateInput").value.trim();
+    const time = document.getElementById("timeInput").value.trim();
+    const venue = document.getElementById("venueInput").value.trim();
+    const family = document.getElementById("familyInput").value.trim();
+
+    if (!groom || !bride || !date || !time || !venue || !family) {
+        document.getElementById("editorStatus").textContent =
+            "Please fill in all the fields.";
+        return;
+    }
+
+    // Display the entered names
+    document.getElementById("groomName").textContent = groom;
+    document.getElementById("brideName").textContent = bride;
+    document.getElementById("familyNames").textContent = family;
+
+    // Display event details
+    document.getElementById("cardDate").textContent = date;
+    document.getElementById("cardTime").textContent = time;
+    document.getElementById("cardVenue").textContent = venue;
+
+    // Save details in browser storage
+    if (save) {
+        try {
+            const data = {groom, bride, date, time, venue, family};
+            localStorage.setItem("weddingCardDetails", JSON.stringify(data));
+            document.getElementById("editorStatus").textContent =
+                "✓ Invitation updated and saved successfully!";
+        } catch (error) {
+            document.getElementById("editorStatus").textContent =
+                "Invitation updated, but browser storage is unavailable.";
+        }
+    }
+
+    // Update browser title
+    document.title = groom + " & " + bride + " - Wedding Invitation";
+}
+
+// Load previously saved details
+function loadCard() {
+    let data = defaults;
+
+    try {
+        const saved = localStorage.getItem("weddingCardDetails");
+        if (saved) data = {...defaults, ...JSON.parse(saved)};
+    } catch (error) {
+        // Use defaults if stored data is invalid
+    }
+
+    document.getElementById("groomInput").value = data.groom;
+    document.getElementById("brideInput").value = data.bride;
+    document.getElementById("dateInput").value = data.date;
+    document.getElementById("timeInput").value = data.time;
+    document.getElementById("venueInput").value = data.venue;
+    document.getElementById("familyInput").value = data.family;
+
+    updateCard(false);
+}
+
+// Reset to original details
+function resetCard() {
+    document.getElementById("groomInput").value = defaults.groom;
+    document.getElementById("brideInput").value = defaults.bride;
+    document.getElementById("dateInput").value = defaults.date;
+    document.getElementById("timeInput").value = defaults.time;
+    document.getElementById("venueInput").value = defaults.venue;
+    document.getElementById("familyInput").value = defaults.family;
+
+    try {
+        localStorage.removeItem("weddingCardDetails");
+    } catch (error) {}
+
+    updateCard(false);
+    document.getElementById("editorStatus").textContent =
+        "Invitation restored to default details.";
+}
+
+// Share invitation
+async function shareCard() {
+    const groom = document.getElementById("groomName").textContent;
+    const bride = document.getElementById("brideName").textContent;
+    const date = document.getElementById("cardDate").textContent;
+    const time = document.getElementById("cardTime").textContent;
+    const venue = document.getElementById("cardVenue").textContent;
+
+    const text =
+        "💍 Wedding Invitation 💍\n\n" +
+        "With joy, we invite you to the wedding of\n" +
+        groom + " & " + bride + "\n\n" +
+        date + "\n" + time + "\n" + venue +
+        "\n\nYour presence and blessings mean the world to us.";
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: groom + " & " + bride + " Wedding",
+                text: text,
+                url: location.href
+            });
+        } catch (error) {
+            // User cancelled sharing
+        }
+    } else if (navigator.clipboard) {
+        try {
+            await navigator.clipboard.writeText(text + "\n" + location.href);
+            alert("Invitation details copied!");
+        } catch (error) {
+            alert("Please copy the invitation manually.");
+        }
+    } else {
+        alert("Sharing is not supported in this browser.");
+    }
+}
+
+// Falling flower petals
+const symbols = ["✿", "❀", "✽", "❁"];
+
+function createPetal() {
+    const petal = document.createElement("span");
+    petal.className = "petal";
+    petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = (12 + Math.random() * 15) + "px";
+
+    const duration = 6 + Math.random() * 7;
+    petal.style.animationDuration = duration + "s";
+
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), duration * 1000);
+}
+
+let petalInterval = setInterval(createPetal, 500);
+
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        clearInterval(petalInterval);
+    } else {
+        petalInterval = setInterval(createPetal, 500);
+    }
+});
+
+// Restore names and other details when page opens
+loadCard();
+</script>
+
+</body>
+</html>
